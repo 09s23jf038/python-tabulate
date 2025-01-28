@@ -2203,7 +2203,7 @@ def tabulate(
     Tabulate will, by default, set the width of each column to the length of the
     longest element in that column. However, in situations where fields are expected
     to reasonably be too long to look good as a single line, tabulate can help automate
-    word wrapping long fields for you. Use the parameter `maxcolwidths` to provide a
+    word wrapping long fields for you. Use the parameter `maxcolwidth` to provide a
     list of maximal column widths
 
     >>> print(tabulate( \
@@ -2221,7 +2221,7 @@ def tabulate(
     |            |            | better if it is wrapped a bit |
     +------------+------------+-------------------------------+
 
-    Header column width can be specified in a similar way using `maxheadercolwidths`
+    Header column width can be specified in a similar way using `maxheadercolwidth`
 
     """
 
@@ -2234,7 +2234,6 @@ def tabulate(
     list_of_lists, separating_lines = _remove_separating_lines(list_of_lists)
 
     if maxcolwidths is not None:
-        MIN_PADDING = 0
         if type(maxcolwidths) is tuple:  # Check if tuple, convert to list if so
             maxcolwidths = list(maxcolwidths)
         if len(list_of_lists):
@@ -2252,7 +2251,6 @@ def tabulate(
         )
 
     if maxheadercolwidths is not None:
-        MIN_PADDING = 0
         num_cols = len(list_of_lists[0])
         if isinstance(maxheadercolwidths, int):  # Expand scalar for all columns
             maxheadercolwidths = _expand_iterable(
